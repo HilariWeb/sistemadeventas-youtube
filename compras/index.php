@@ -17,7 +17,7 @@ include ('../app/controllers/compras/listado_de_compras.php');
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1 class="m-0">Listado de compras</h1>
+                    <h1 class="m-0">Listado de compras actualizado</h1>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->

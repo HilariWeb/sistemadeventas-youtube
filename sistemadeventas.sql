@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-02-2023 a las 22:25:50
+-- Tiempo de generación: 07-03-2023 a las 21:33:15
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -50,7 +50,7 @@ CREATE TABLE `tb_almacen` (
 --
 
 INSERT INTO `tb_almacen` (`id_producto`, `codigo`, `nombre`, `descripcion`, `stock`, `stock_minimo`, `stock_maximo`, `precio_compra`, `precio_venta`, `fecha_ingreso`, `imagen`, `id_usuario`, `id_categoria`, `fyh_creacion`, `fyh_actualizacion`) VALUES
-(1, 'P-00001', 'COCA QUINA', 'de 2 litros', 350, 20, 500, '9', '12', '2023-02-12', '2023-02-12-06-26-25__6020052-1000x1000.jpg', 1, 1, '2023-02-12 18:26:25', '0000-00-00 00:00:00'),
+(1, 'P-00001', 'COCA QUINA', 'de 2 litros', 15, 20, 500, '9', '12', '2023-02-12', '2023-02-12-06-26-25__6020052-1000x1000.jpg', 1, 1, '2023-02-12 18:26:25', '0000-00-00 00:00:00'),
 (2, 'P-00002', 'AUDIFONOS', 'Con cargado incorporado', 100, 10, 200, '80', '120', '2023-02-13', '2023-02-13-02-29-53__8810fb37cb2f03d30c7c467ec772b5ed6811e7e6.jpeg', 1, 11, '2023-02-13 14:29:53', '0000-00-00 00:00:00'),
 (3, 'P-00003', 'VINO TINTO', 'VINO TINTO BLANCO DE 300 ml', 120, 10, 200, '50', '80', '2023-02-13', '2023-02-13-02-35-15__vino.JPG', 1, 1, '2023-02-13 14:35:15', '0000-00-00 00:00:00');
 
@@ -92,7 +92,7 @@ CREATE TABLE `tb_compras` (
   `id_compra` int(11) NOT NULL,
   `id_producto` int(11) NOT NULL,
   `nro_compra` int(11) NOT NULL,
-  `fecha_compra` datetime NOT NULL,
+  `fecha_compra` date NOT NULL,
   `id_proveedor` int(11) NOT NULL,
   `comprobante` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `id_usuario` int(11) NOT NULL,
@@ -107,12 +107,12 @@ CREATE TABLE `tb_compras` (
 --
 
 INSERT INTO `tb_compras` (`id_compra`, `id_producto`, `nro_compra`, `fecha_compra`, `id_proveedor`, `comprobante`, `id_usuario`, `precio_compra`, `cantidad`, `fyh_creacion`, `fyh_actualizacion`) VALUES
-(1, 1, 1, '2023-02-12 23:37:24', 10, 'FACTURA', 1, '200', 50, '2023-02-12 23:37:24', '2023-02-12 23:37:24'),
-(2, 3, 2, '2023-02-17 00:00:00', 10, 'FACTURA NRO 120', 1, '5000', 50, '2023-02-17 22:35:24', '0000-00-00 00:00:00'),
-(3, 1, 3, '2023-02-17 00:00:00', 10, 'NOTA DE VENTA NRO 523', 1, '250', 100, '2023-02-17 22:37:33', '0000-00-00 00:00:00'),
-(4, 3, 4, '2023-02-21 00:00:00', 10, 'FACTURA NRO 300', 1, '5000', 50, '2023-02-21 17:08:58', '0000-00-00 00:00:00'),
-(5, 3, 5, '2023-02-21 00:00:00', 10, 'NOTA DE VENTA 0001', 1, '1000', 20, '2023-02-21 17:10:16', '0000-00-00 00:00:00'),
-(6, 1, 6, '2023-02-21 00:00:00', 10, 'FACTURA NRO 320', 1, '2350', 150, '2023-02-21 17:11:12', '0000-00-00 00:00:00');
+(1, 1, 1, '2023-02-12', 10, 'FACTURA', 1, '200', 50, '2023-02-12 23:37:24', '2023-02-12 23:37:24'),
+(2, 3, 2, '2023-02-17', 10, 'FACTURA NRO 120', 1, '5000', 50, '2023-02-17 22:35:24', '0000-00-00 00:00:00'),
+(3, 1, 3, '2023-02-17', 10, 'NOTA DE VENTA NRO 523', 1, '250', 100, '2023-02-17 22:37:33', '0000-00-00 00:00:00'),
+(4, 3, 4, '2023-02-21', 10, 'FACTURA NRO 300', 1, '5000', 50, '2023-02-21 17:08:58', '0000-00-00 00:00:00'),
+(5, 3, 5, '2023-02-21', 10, 'NOTA DE VENTA 0001', 1, '1000', 20, '2023-02-21 17:10:16', '2023-03-05 22:17:59'),
+(6, 1, 6, '2023-02-21', 10, 'FACTURA NRO 320', 1, '2350', 150, '2023-02-21 17:11:12', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -253,7 +253,7 @@ ALTER TABLE `tb_categorias`
 -- AUTO_INCREMENT de la tabla `tb_compras`
 --
 ALTER TABLE `tb_compras`
-  MODIFY `id_compra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_compra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_proveedores`
@@ -288,9 +288,9 @@ ALTER TABLE `tb_almacen`
 -- Filtros para la tabla `tb_compras`
 --
 ALTER TABLE `tb_compras`
-  ADD CONSTRAINT `tb_compras_ibfk_1` FOREIGN KEY (`id_proveedor`) REFERENCES `tb_proveedores` (`id_proveedor`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `tb_compras_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `tb_almacen` (`id_producto`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `tb_compras_ibfk_3` FOREIGN KEY (`id_usuario`) REFERENCES `tb_usuarios` (`id_usuario`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `tb_compras_ibfk_3` FOREIGN KEY (`id_usuario`) REFERENCES `tb_usuarios` (`id_usuario`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_compras_ibfk_4` FOREIGN KEY (`id_proveedor`) REFERENCES `tb_proveedores` (`id_proveedor`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `tb_usuarios`
